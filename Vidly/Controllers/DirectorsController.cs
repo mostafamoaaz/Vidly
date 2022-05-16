@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,127 +10,108 @@ using Vidly.Models;
 
 namespace Vidly.Controllers
 {
-    public class MoviesController : Controller
+    public class DirectorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Movies
+        // GET: Directors
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            return View(db.Directors.ToList());
         }
 
-        // GET: Movies/Details/5
+        // GET: Directors/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
-            if (movie == null)
+            Director director = db.Directors.Find(id);
+            if (director == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(director);
         }
 
-        // GET: Movies/Create
+        // GET: Directors/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Directors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Movie movie)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Age")] Director director)
         {
             if (ModelState.IsValid)
             {
-                if (movie.picture != null)
-                {
-                    string path = Path.Combine(Server.MapPath("~/UploadedFiles"), movie.picture.FileName);
-                    movie.picture.SaveAs(path);
-
-                    movie.GeneralImageUrl = GetFileName(movie.picture.FileName);
-                }
-
-                db.Movies.Add(movie);
+                
+                db.Directors.Add(director);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(movie);
+            return View(director);
         }
-        private string GetFileName(string hrefLink)
-        {
-            string[] parts = hrefLink.Split('/');
-            string fileName = "";
-
-            if (parts.Length > 0)
-                fileName = parts[parts.Length - 1];
-            else
-                fileName = hrefLink;
-
-            return fileName;
-        }
-
-        // GET: Movies/Edit/5
+        
+        // GET: Directors/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
-            if (movie == null)
+            Director director = db.Directors.Find(id);
+            if (director == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(director);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Directors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,GeneralImageUrl,DirectorId")] Movie movie)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Age")] Director director)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(movie).State = EntityState.Modified;
+                db.Entry(director).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(movie);
+            return View(director);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Directors/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
-            if (movie == null)
+            Director director = db.Directors.Find(id);
+            if (director == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(director);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Directors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Movie movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
+            Director director = db.Directors.Find(id);
+            db.Directors.Remove(director);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

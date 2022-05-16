@@ -1,6 +1,6 @@
 ﻿@model Vidly.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Profile";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -10,6 +10,26 @@
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>Profile picture:</dt>
+        <dd>
+            upload profile picture
+        </dd>
+
+        <dt>Favourite Movies:</dt>
+        <dd>
+            drop list
+        </dd>
+
+        <dt>Favourite Actors:</dt>
+        <dd>
+            drop list
+        </dd>
+
+        <dt>Favourite Directors:</dt>
+        <dd>
+            drop list
+        </dd>
+
         <dt>Password:</dt>
         <dd>
             [
@@ -23,6 +43,8 @@
             }
             ]
         </dd>
+
+@*
         <dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [
@@ -36,30 +58,30 @@
              
              Uncomment the following block after you have set up two-factor authentication
         *@
-        @*  
-            <dt>Phone Number:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None") [
-                @if (Model.PhoneNumber != null)
-                {
-                    @Html.ActionLink("Change", "AddPhoneNumber")
-                    @: &nbsp;|&nbsp;
-                    @Html.ActionLink("Remove", "RemovePhoneNumber")
-                }
-                else
-                {
-                    @Html.ActionLink("Add", "AddPhoneNumber")
-                }
-                ]
-            </dd>
-        *@
-        <dt>Two-Factor Authentication:</dt>
+        @*
+        <dt>Phone Number:</dt>
         <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
-            @*@if (Model.TwoFactor)
+            @(Model.PhoneNumber ?? "None") [
+            @if (Model.PhoneNumber != null)
+            {
+                @Html.ActionLink("Change", "AddPhoneNumber")
+                @: &nbsp;|&nbsp;
+                @Html.ActionLink("Remove", "RemovePhoneNumber")
+            }
+            else
+            {
+                @Html.ActionLink("Add", "AddPhoneNumber")
+            }
+            ]
+        </dd>
+
+    <dt>Two-Factor Authentication:</dt>
+    <dd>
+        <p>
+            There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+            for details on setting up this ASP.NET application to support two-factor authentication.
+        </p>
+        *@  @*@if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
@@ -80,5 +102,6 @@
                     }
                 }*@
         </dd>
+
     </dl>
 </div>
