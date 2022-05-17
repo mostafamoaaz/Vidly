@@ -20,24 +20,34 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GeneralImageUrl)
+            @Html.DisplayNameFor(model => model.picture)
         </dt>
 
         <dd>
-            <img src="~/UploadedFiles/@Url.Content(Model.GeneralImageUrl)" />
+        @if (Model.GeneralImageUrl == null)
+        {
+            <p>image not found</p>
+        }
+        else
+        {
+            <img src="~/UploadedFiles/@Url.Content(Model.GeneralImageUrl)" width="200" height="300" alt="image not found" />
+        }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DirectorId)
+            @Html.DisplayNameFor(model => model.Director)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DirectorId)
+            @Html.DisplayFor(model => model.Director.FirstName)
+            @Html.DisplayFor(model => model.Director.LastName)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+<button class="btn btn-default">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+</button>
+<button class="btn btn-default">
     @Html.ActionLink("Back to List", "Index")
-</p>
+</button>

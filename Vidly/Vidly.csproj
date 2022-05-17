@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -179,6 +180,10 @@
     <Compile Include="Migrations\202205161740311_ok1.Designer.cs">
       <DependentUpon>202205161740311_ok1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205170028348_done.cs" />
+    <Compile Include="Migrations\202205170028348_done.Designer.cs">
+      <DependentUpon>202205170028348_done.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\Director.cs" />
@@ -192,6 +197,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -281,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205161740311_ok1.resx">
       <DependentUpon>202205161740311_ok1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205170028348_done.resx">
+      <DependentUpon>202205170028348_done.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

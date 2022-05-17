@@ -21,11 +21,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GeneralImageUrl)
+            Picture
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GeneralImageUrl)
+            @if (Model.GeneralImageUrl == null)
+            {
+                <p>image not found</p>
+            }
+            else
+            {
+                <img src="~/UploadedFiles/@Url.Content(Model.GeneralImageUrl)" width="200" height="300" alt="image not found" />
+            }
+            
         </dd>
 
         <dt>
@@ -43,7 +51,9 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <button>
+                @Html.ActionLink("Back to List", "Index")
+            </button>
         </div>
     }
 </div>

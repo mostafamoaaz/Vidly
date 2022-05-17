@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Vidly.Models;
+using System.IO;
 
 namespace Vidly.Controllers
 {
@@ -50,6 +51,42 @@ namespace Vidly.Controllers
             {
                 _userManager = value;
             }
+        }
+/*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create( UserAccount user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (user.picture != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/UploadedFiles"), movie.picture.FileName);
+                    user.picture.SaveAs(path);
+
+                    user.GeneralImageUrl = GetFileName(user.picture.FileName);
+                }
+
+                db.AspNetUsers.Edit(user);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+*/
+        private System.Security.Principal.IPrincipal UserAccount()
+        {
+            throw new NotImplementedException();
+        }
+        private string GetFileName(string hrefLink)
+        {
+            string[] parts = hrefLink.Split('/');
+            string fileName = "";
+
+            if (parts.Length > 0)
+                fileName = parts[parts.Length - 1];
+            else
+                fileName = hrefLink;
+
+            return fileName;
         }
 
         //

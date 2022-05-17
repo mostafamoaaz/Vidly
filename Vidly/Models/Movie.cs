@@ -25,12 +25,13 @@ namespace Vidly.Models
 
         public string DirectorId { get; set; }
 
+
         public Director Director { get; set; }
 
         public List<Actor> Actors { get; set; }
 
         public List<String> Reviews { get; set; }
-
+        
         [NotMapped]
         public HttpPostedFileBase picture { get; set; }
 

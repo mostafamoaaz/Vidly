@@ -99,10 +99,17 @@ namespace Vidly.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,GeneralImageUrl,DirectorId")] Movie movie)
+        public ActionResult Edit( Movie movie)
         {
             if (ModelState.IsValid)
             {
+                if (movie.picture != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/UploadedFiles"), movie.picture.FileName);
+                    movie.picture.SaveAs(path);
+
+                    movie.GeneralImageUrl = GetFileName(movie.picture.FileName);
+                }
                 db.Entry(movie).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
